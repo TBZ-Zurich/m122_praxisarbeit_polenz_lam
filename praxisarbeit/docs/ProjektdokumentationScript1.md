@@ -20,7 +20,7 @@ TODO: schreiben sie wie die Skripte aufgerufen werden sollen (d.h. welche Parame
 
 ### Ablauf der Automation
 
-![Activity Diagram](./assets/ActivityDiagramS1.svg)
+![Activity Diagram](./assets/ActivityDiagramS1.png)
 
 ### Konfigurationsdateien
 
