@@ -1,22 +1,64 @@
 # Projekt Dokumentation
 
+  
+
 [[_TOC_]]
 
-## Lösungsdesign
-Anhand der Analyse wurde folgendes Lösungsdesign entworfen.
+  
 
-### Aufruf der Skripte
+## Solution design
 
-TODO: schreiben sie wie die Skripte aufgerufen werden sollen (d.h. welche Parameter werden übergeben, gibt es Interaktionen mit dem Skript, läuft es automatisch täglich ab?)
+Based on the analysis, the following solution design was created.
+
+  
+
+### Calling the scripts
+
+**Script 2:**
+
+The script is executed in a cronjob. The cronjob is always executed at a certain time (defined in the cronjob configs by the user). All configurations do not have to be passed as parameters, but can be written into the config files.
+
+  
 
 ### Ablauf der Automation
+![[/assets/Diagram 2022-03-04 10-10-29.png]]​
 
-TODO: Hier kommt ihr UML-Activity Diagramm
+  
 
 ### Konfigurationsdateien
 
-TODO: Definieren sie welche Parameter in welchen Konfigurationsdateien gespeichert werden.
+
+**backup.config.sample**
+
+```
+<groupname>
+/path/
+name
+
+```
+
+
+**dontbackup.config.sample**
+
+```
+<groupname>
+/path/
+name
+```
+
+**backupdata.config.sample**
+
+```
+
+filename=NameOfTheFile-{timestamp}
+keepindays=5
+backuplocation=/backup
+
+```
+  
 
 ## Abgrenzungen zum Lösungsdesign
+
+  
 
 TODO: Nachdem das Programm verwirklicht wurde, hier die Unterschiede von der Implementation zum Lösungsdesign beschreiben (was wurde anders gemacht, was wurde nicht gemacht, was wurde zusaetzlich gemacht)
