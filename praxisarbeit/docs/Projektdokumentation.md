@@ -21,7 +21,7 @@ The script is executed in a cronjob. The cronjob is always executed at a certain
   
 
 ### Ablauf der Automation
-![[/assets/Diagram 2022-03-04 10-10-29.png]]​
+![[./assets/Diagram 2022-03-04 10-10-29.png]]​
 
   
 
