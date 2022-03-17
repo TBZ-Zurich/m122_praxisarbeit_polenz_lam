@@ -11,6 +11,14 @@ while getopts u:b:p:d: optvar ; do
     esac
 done
 
+
+for i in ../etc/userwizzard/backup.g*g.config;
+do
+    echo $i
+done
+
+
+
 usage () {
     echo "Usage: ./script.sh -p <default_password> -d <path_to_template_dir> -u <path_to_user_config> -b <path_to_backup_config>"
     exit 0
@@ -69,19 +77,22 @@ check_group_existance () {
 }
 
 check_backup_status () {
-    for i in /etc/userwizzard/backup.*.config;
+    for i in ../etc/userwizzard/backup.g*g.config;
     do
-        echo $i
-    done
-
-
-    while IFS= read -r line; do
-        if [[ $line = "<"* ]] && [[ $2 = ${line:1:-1} ]]
-        then
-            return    
+        if [ $i -eq "../etc/userwizzard/backup.g$2g.config" ]
+        then 
+            return
         fi
+    done 
 
-    done < $1
+
+    # while IFS= read -r line; do
+    #     if [[ $line = "<"* ]] && [[ $2 = ${line:1:-1} ]]
+    #     then
+    #         return    
+    #     fi
+
+    # done < $1
     
     logger "Users in $2 are not backed up"
     echo "Be aware, all users in the $2 group are currently not backed up."
