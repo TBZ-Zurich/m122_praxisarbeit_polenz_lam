@@ -1,3 +1,4 @@
+<<<<<<< HEAD
     #!/bin/sh
 
     # Creates a log file
