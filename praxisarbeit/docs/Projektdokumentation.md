@@ -88,4 +88,4 @@ We chose to define our config files not in /etc/ but in etc/. This means our scr
 
 The construction of the config files at the beginning were much too complicated. Therefore we had to switch to another construction, which was technically much easier for me to implement than the previously planned. Due to two seperate scripts one of the scripts had to be changed to fit the new config files.
 
-Overall we were able to create the scripts with a good functionality and like we planned it in the above files.
+Overall we were able to create the scripts with a good functionality and like we planned it in the above files. Some things could have been solved easier but it works and we were able to make a great experience lerning bash.
