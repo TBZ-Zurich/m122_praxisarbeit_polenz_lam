@@ -86,4 +86,6 @@ backuplocation=/backup
 
 We chose to define our config files not in /etc/ but in etc/. This means our scripts run only within the directory they are intendet.
 
-TODO: Nachdem das Programm verwirklicht wurde, hier die Unterschiede von der Implementation zum Lösungsdesign beschreiben (was wurde anders gemacht, was wurde nicht gemacht, was wurde zusaetzlich gemacht)
+The construction of the config files at the beginning were much too complicated. Therefore we had to switch to another construction, which was technically much easier for me to implement than the previously planned. Due to two seperate scripts one of the scripts had to be changed to fit the new config files.
+
+Overall we were able to create the scripts with a good functionality and like we planned it in the above files.
