@@ -1,7 +1,6 @@
-#! /opt/homebrew/bin/bash
+#! /bin/bash
 
-# Talk about last line not read issue  https://stackoverflow.com/questions/12916352/shell-script-read-missing-last-line
-
+# gets options from cli
 while getopts u:b:p:d: optvar ; do
     case $optvar in
         u) CONFIG_FILE="${OPTARG}";;
@@ -11,19 +10,13 @@ while getopts u:b:p:d: optvar ; do
     esac
 done
 
-
-for i in ../etc/userwizzard/backup.g*g.config;
-do
-    echo $i
-done
-
-
-
+# returns usage guide and exits
 usage () {
-    echo "Usage: ./script.sh -p <default_password> -d <path_to_template_dir> -u <path_to_user_config> -b <path_to_backup_config>"
+    echo "Usage: ./script.sh -p <default_password> -d <path_to_template_dir> -u <path_to_user_config> -b <path_to_backup_config_dir>"
     exit 0
 }
 
+# checks dependencies needed for script 
 check_dependencies () {
     if ! [ $(which mkpasswd) ]
     then
@@ -34,15 +27,17 @@ check_dependencies () {
     logger "Dependencies: validated"
 }
 
+#checks if input directories exist
 check_input () {
     if ! [ -f $CONFIG_FILE ]; then usage; fi
-    if ! [ -f $BACKUP_CONFIG ]; then usage; fi
+    if ! [ -d $BACKUP_CONFIG ]; then usage; fi
     if ! [ -d $DIRECTORY_TEMPLATE ]; then usage; fi
     if ! [ $DEFAULT_PASSWORD ]; then usage; fi
 
     logger "Agrs: validated"
 }
 
+#logs log data with timestamp to file
 logger () {
     DATE=`date '+%Y.%m.%d'`
     TIME=`date '+%H:%M:%S'`
@@ -51,9 +46,8 @@ logger () {
     echo "$TIME: $1" >> $file
 }
 
-
+#ensures that userfile is valid and can be used
 ensure_file_integrity () {
-    # Check valid inputs => 4 strings per line
     while IFS= read -r line; do
         stringArr=($line)
 
@@ -67,6 +61,7 @@ ensure_file_integrity () {
     logger "Config: validated"
 }
 
+#checks if group exists, if not warns user and creates it
 check_group_existance () {
     if ! [ $(getent group $1) ];
     then
@@ -76,6 +71,7 @@ check_group_existance () {
     fi
 }
 
+#reads group bachup files and checks if group is backed up
 check_backup_status () {
     for i in ../etc/userwizzard/backup.g*g.config;
     do
@@ -84,20 +80,12 @@ check_backup_status () {
             return
         fi
     done 
-
-
-    # while IFS= read -r line; do
-    #     if [[ $line = "<"* ]] && [[ $2 = ${line:1:-1} ]]
-    #     then
-    #         return    
-    #     fi
-
-    # done < $1
     
     logger "Users in $2 are not backed up"
     echo "Be aware, all users in the $2 group are currently not backed up."
 }
 
+#checks user existance and creates if it does not
 check_user_existance () {
     if ! [ $(getent passwd $1) ];
     then
@@ -108,13 +96,14 @@ check_user_existance () {
     fi
 }
 
+#generates homedir based on configs
 generate_user_homedir () {
     TEMPLATE_FILE="$1$3.template"
 
     if ! [ -f TEMPLATE_FILE ];
     then
         logger "Use default directory template"
-        TEMPLATE_FILE="./dirtemplate.conf"
+        TEMPLATE_FILE="../etc/dirtemplate.conf"
     fi
 
     echo $TEMPLATE_FILE
@@ -130,6 +119,7 @@ check_dependencies
 check_input
 ensure_file_integrity
 
+# handels steps for createing a user and groups in one loop
 while IFS= read -r line; do
     if ! [[ "$line" =~ ^[a-z] ]]
     then

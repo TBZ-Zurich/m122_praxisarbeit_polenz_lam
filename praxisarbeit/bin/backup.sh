@@ -4,10 +4,10 @@
     # Check for update
     CWD='pwd'		# current working directory
     HOME=
-    CONF='/etc/userwizzard/backupdata.config'
-    BACKUP='/etc/userwizzard/backup._example_.config'
-    DONTBACKUP='/etc/userwizzard/dontbackup._example_.config'
-    DIR='/etc/userwizzard/'
+    CONF='../etc/userwizzard/backupdata.config'
+    BACKUP='../etc/userwizzard/backup._example_.config'
+    DONTBACKUP='../etc/userwizzard/dontbackup._example_.config'
+    DIR='../etc/userwizzard/'
     KEEPINDAYS=1
     FILENAME='backup'
     BACKUPLOCATION='/root/backuptest/'
