@@ -84,4 +84,6 @@ backuplocation=/backup
 
 ## Abgrenzungen zum Lösungsdesign
 
+We chose to define our config files not in /etc/ but in etc/. This means our scripts run only within the directory they are intendet.
+
 TODO: Nachdem das Programm verwirklicht wurde, hier die Unterschiede von der Implementation zum Lösungsdesign beschreiben (was wurde anders gemacht, was wurde nicht gemacht, was wurde zusaetzlich gemacht)
