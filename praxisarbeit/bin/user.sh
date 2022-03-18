@@ -12,7 +12,7 @@ done
 
 # returns usage guide and exits
 usage () {
-    echo "Usage: ./script.sh -p <default_password> -d <path_to_template_dir> -u <path_to_user_config> -b <path_to_backup_config_dir>"
+    echo "Usage: ./user.sh -p <default_password> -d <path_to_template_dir> -u <path_to_user_config> -b <path_to_backup_config_dir>"
     exit 0
 }
 
@@ -75,7 +75,7 @@ check_group_existance () {
 check_backup_status () {
     for i in ../etc/userwizzard/backup.g*g.config;
     do
-        if [ $i -eq "../etc/userwizzard/backup.g$2g.config" ]
+        if [ $i = "../etc/userwizzard/backup.g$2g.config" ]
         then 
             return
         fi
@@ -106,8 +106,6 @@ generate_user_homedir () {
         TEMPLATE_FILE="../etc/dirtemplate.conf"
     fi
 
-    echo $TEMPLATE_FILE
-
     while IFS= read -r line; do
         mkdir -p /home/$2$line
     done < $TEMPLATE_FILE
@@ -115,8 +113,8 @@ generate_user_homedir () {
     logger "Created directory template"
 }
 
-check_dependencies
 check_input
+check_dependencies
 ensure_file_integrity
 
 # handels steps for createing a user and groups in one loop
